@@ -51,8 +51,28 @@ public class Database {
         return true;*/
     }
 
-    //public List<Object> getAll(Object object, String query){
-    //    return this.connection.query( new OSQLSynchQuery<object>(query));
-    //}
+
+    /*
+        General wrappers
+     */
+    public void registerClass(Class classToRegister){
+        this.connection.getEntityManager().registerEntityClass(classToRegister);
+        this.connection.setAutomaticSchemaGeneration(true);
+    }
+
+    /*
+        Operations
+     */
+    public Object newInstance(Class newClass){
+        return this.connection.newInstance(newClass);
+    }
+
+    /*
+        Getters
+     */
+
+    public List<?> getAll(OSQLSynchQuery query){
+        return this.connection.query( query );
+    }
 
 }
